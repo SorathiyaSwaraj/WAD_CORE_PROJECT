@@ -1,0 +1,63 @@
+﻿@model IEnumerable<wad_core_project.Models.Transactions>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Transactions</h1>
+
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+
+<!-- Date Filter Form -->
+<form method="get" asp-action="Index">
+    <div class="form-group">
+        <label for="startDate">Start Date:</label>
+        <input type="date" id="startDate" name="startDate" class="form-control" value="@ViewData["StartDate"]" />
+    </div>
+    <div class="form-group">
+        <label for="endDate">End Date:</label>
+        <input type="date" id="endDate" name="endDate" class="form-control" value="@ViewData["EndDate"]" />
+    </div>
+    <button type="submit" class="btn btn-primary">Filter</button>
+</form>
+
+<!-- Transactions Table -->
+<h2>Transactions</h2>
+@if (!Model.Any())
+{
+    <p>No transactions found within the specified date range.</p>
+}
+else
+{
+    <table class="table">
+        <thead>
+            <tr>
+                <th>@Html.DisplayNameFor(model => model.Products.Name)</th>
+                <th>@Html.DisplayNameFor(model => model.Suppliers.Name)</th>
+                <th>@Html.DisplayNameFor(model => model.TransactionType)</th>
+                <th>@Html.DisplayNameFor(model => model.QuantityChanged)</th>
+                <th>@Html.DisplayNameFor(model => model.TransactionDate)</th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>@Html.DisplayFor(modelItem => item.Products.Name)</td>
+                    <td>@Html.DisplayFor(modelItem => item.Suppliers.Name)</td>
+                    <td>@Html.DisplayFor(modelItem => item.TransactionType)</td>
+                    <td>@Html.DisplayFor(modelItem => item.QuantityChanged)</td>
+                    <td>@Html.DisplayFor(modelItem => item.TransactionDate)</td>
+                    <td>
+                        <a asp-action="Edit" asp-route-id="@item.TransactionId">Edit</a> |
+                        <a asp-action="Details" asp-route-id="@item.TransactionId">Details</a> |
+                        <a asp-action="Delete" asp-route-id="@item.TransactionId">Delete</a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}

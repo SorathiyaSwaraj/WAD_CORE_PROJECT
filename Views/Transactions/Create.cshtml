@@ -1,0 +1,65 @@
+﻿@model wad_core_project.Models.Transactions
+
+@{
+    ViewData["Title"] = "Create";
+}
+
+<h1>Create</h1>
+
+<h4>Transactions</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <!-- Validation Summary to display all validation errors -->
+        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+            <form asp-action="Create">
+                <div class="form-group">
+                    <label asp-for="ProductsId" class="control-label"></label>
+                    <select asp-for="ProductsId" class="form-control" asp-items="ViewBag.ProductsId"></select>
+                    <span asp-validation-for="ProductsId" class="text-danger"></span>
+                </div>
+
+                <div class="form-group">
+                    <label asp-for="SuppliersId" class="control-label"></label>
+                    <select asp-for="SuppliersId" class="form-control" asp-items="ViewBag.SuppliersId"></select>
+                    <span asp-validation-for="SuppliersId" class="text-danger"></span>
+                </div>
+
+                <div class="form-group">
+                    <label asp-for="TransactionType" class="control-label"></label>
+                    <select asp-for="TransactionType" class="form-control">
+                        <option value="">-- Select Transaction Type --</option>
+                        <option value="IN">IN</option>
+                        <option value="OUT">OUT</option>
+                    </select>
+                    <span asp-validation-for="TransactionType" class="text-danger"></span>
+                </div>
+
+                <div class="form-group">
+                    <label asp-for="QuantityChanged" class="control-label"></label>
+                    <input asp-for="QuantityChanged" class="form-control" />
+                    <span asp-validation-for="QuantityChanged" class="text-danger"></span>
+                </div>
+
+                <div class="form-group">
+                    <label asp-for="TransactionDate" class="control-label"></label>
+                    <input asp-for="TransactionDate" class="form-control" value="@Model.TransactionDate.ToString("yyyy-MM-ddTHH:mm")" />
+                    <span asp-validation-for="TransactionDate" class="text-danger"></span>
+                </div>
+
+
+                <div class="form-group">
+                    <button type="submit" class="btn btn-primary">Save</button>
+                </div>
+            </form>
+        </div>
+</div>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

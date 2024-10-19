@@ -1,0 +1,32 @@
+﻿@model IEnumerable<wad_core_project.Models.Products>
+
+@{
+    ViewData["Title"] = "Home Page";
+}
+
+<h2>Products with Low Quantity</h2>
+
+@if (!Model.Any())
+{
+    <p>All products have sufficient stock.</p>
+}
+else
+{
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Name</th>
+                <th>Quantity</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var product in Model)
+            {
+                <tr>
+                    <td>@product.Name</td>
+                    <td>@product.Quantity</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}
